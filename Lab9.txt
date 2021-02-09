@@ -1,0 +1,85 @@
+#!/bin/bash
+# Lab 9
+# Rutvik Patel
+# 040915445
+# 2019-04-17
+# CST 8102 Operation System Fundamental(GNU/Linux)
+
+
+
+do
+echo "Choose one of the following options:"
+
+echo  "menu:"
+echo  "A: to create a user account"
+echo  "B: to add/change comment/information for a user account"
+echo  "C: to change expirtion date for user account"
+echo  "Q: to quit"
+
+
+echo What would you like to do?
+
+read choice
+echo "You Entered $choice"
+
+if [ $choice == "A" ] || [ $choice == "a" ]
+then
+
+   read -p "Enter User Name : " username
+   read -p "Enter User's home directory : " userHome
+   read -p "Enter User's Default login shell : " defShell
+
+
+    sudo useradd -d /home/$userHome -s /bin/$defShell $username
+
+
+        if [ $? -eq 0 ]; then
+        echo "$username added Thanks"
+        else
+     echo "Something went wrong may be user already exsist please try again"
+    fi
+      
+
+elif [ $choice == "B" ] || [ $choice == "b" ]
+then
+   read -p " Enter User Name :" username
+   read -p "Enter comment to be added: " comment
+   sudo usermod -c "$comment" "$username"   
+   if [ $? -eq 0 ]
+   then
+   echo Comment added successfully.
+   fi
+   
+
+elif [ $choice == "C" ] || [ $choice == "c" ]
+then
+        read -p "Enter User Name :-" username
+        read -p "Enter Expiration date (YYYY-mm-dd):" exDate
+ 
+        sudo usermod -e $exDate $username
+        if [ $? -eq 0 ]; then
+        echo "Expiration date change"
+        fi
+        
+         
+elif [ $choice == "Q" ] || [ $choice == "q" ] 
+then
+
+        flg=false;
+     echo Thank You!!!!   
+
+exit
+else     
+
+       
+ echo "Please Enter Valid Value "  
+fi       
+sleep 3
+
+done
+
+
+    
+    
+    
+

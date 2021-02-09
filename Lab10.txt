@@ -1,0 +1,147 @@
+#!/bin/bash
+# Rutvik Patel
+# 040915445 
+# Lab 10
+# 17/04/2019
+# This addition and substraction 
+
+
+
+function add()
+{
+   local num1=$1
+   local num2=$2
+
+   total=$((num1+num2))
+ 
+   echo "The sum of $num1 plus (+) $num2 equals $total"
+}
+
+function sub()
+{
+   local num1=$1
+   local num2=$2
+
+   total=$((num1-num2))
+
+   echo "The Substraction of $num1 minus (-) $num2 equals $total"
+}
+
+
+function menuFirst()
+{
+  flag=true
+ while $flag
+ do
+   echo "Menu 1"
+   echo "Please Make a choice"
+   echo "C) Calculation"
+   echo "X) Exit "
+   read choice 
+
+   if [ "$choice" == "c" ] || [ "$choice" == "C" ] || [ "$choice" == "X" ] || [ "$choice" == "x" ];
+   then
+    flag=false
+    fi
+ done
+ clear
+ }
+
+function menuSec()
+{
+  echo "Please enter an integer number or X to exit" 
+  read value
+  clear
+}
+
+
+function menuThree()
+ { 
+  flag=true
+  while $flag
+  do
+    echo "+) ADD"
+    echo "-) SUBTRACT"
+    echo "X) EXIT"
+    read operand  
+if [ "$operand" == "+" ] || [ "$operand" == "-" ] || [ "$operand" == "X" ] || [ "$operand" == "x" ];
+then
+    flag=false
+    fi
+  done
+ clear
+ }
+
+
+if [ $# == 3 ]; then 
+    
+    para1=$1 
+        para2=$2 
+        para3=$3 
+    
+    if [ "$para2" == "+" ]; then
+        add $para1 $para3
+
+
+        elif [ "$para2" == "-" ]; then
+        sub $para1 $para3
+        else 
+
+    echo "Wrong input for Operation need 1 of this (+ or -)"
+        fi
+
+elif [ $# == 0 ]; then
+point=true
+
+while $point
+do 
+  
+    menuFirst 
+    if [ "$choice" == "C" ] || [ "$choice" == "c" ]; then
+   
+         menuSec 
+         varible1=$value
+         if [ "$value" == "X" ] || [ "$value" == "x" ]; then
+         point=false
+         break
+         fi
+ 
+     menuThree
+    if [ "$operand" == "X" ] || [ "$operand" == "x" ]; then
+         point=false
+         break
+         fi
+ 
+
+         menuSec
+    varible2=$value
+    if [ "$value" == "X" ] || [ "$value" == "x" ]; then
+         point=false
+         break
+         fi   
+             
+               if [ "$operand" == "+" ]; then 
+                        result=$((varible1+varible2))
+                        echo "The sum of $varible1 + $varible2 = $result"
+              
+        elif [ "$operand" == "-" ]; then
+                        result=$((varible1-varible2))
+                        echo "The substraction of $varible1 - $varible2 = $result"
+                else
+                point=false
+                break    
+                fi
+      elif [ "$choice" == "X" ] || [ "$choice" == "x" ]; then
+      point=false
+      break
+      fi
+
+sleep 3
+clear
+done
+
+ 
+else 
+ echo "Script run only for 3 or 0 Aarguments"
+fi
+
